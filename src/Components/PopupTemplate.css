@@ -4,8 +4,13 @@
     justify-content: center;
     align-items: center;
 
+    padding-top: 10px;
+
     height: 100%;
     width: 100%;
+
+    overflow: hidden;
+    overflow-y: scroll;
     background-color: rgba(0, 0, 0, 0.5);
 }
 
@@ -18,10 +23,13 @@
 }
 
 .popup-window {
+    position: relative;
+
     background-color: #ccc;
     border-radius: 10px;
 
     width: minmax(650px, 90vh);
+    height: min-content;
 }
 
 .popup-logo {
