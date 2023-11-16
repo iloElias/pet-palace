@@ -1,26 +1,25 @@
 import Logo from "./Logo";
 import CloseIcon from "../svgs/closeWindowIcon.svg";
 import PopupLogo from "../images/popupLogo.png";
-import { LoginInputs } from "./AcountInputs";
+// import { LoginInputs, SingInInputs } from "./AcountInputs";
 import "./PopupTemplate.css";
 
-function PopupTemplate(props) {
+function PopupTemplate({ onClose, dialogImg, title, component, message }) {
     return (
         <span className="popup-modal">
             <div className="popup-window">
                 <div className="popup-header">
                     <div className="popup-logo"><Logo img={PopupLogo} noName /></div>
                     <div className="popup-title">
-                        {props.dialogImg ? (<img className="popup-dialog-image" src={props.dialogImg} alt="Imagem de Dialogo" />) : ""}
-                        {props.title ? props.title : "Caixa de dialogo"}
+                        {dialogImg ? (<img className="popup-dialog-image" src={dialogImg} alt="Imagem de Dialogo" />) : ""}
+                        {title ? title : "Caixa de dialogo"}
                     </div>
                     <div className="close-button-container">
-                        <button onClick={props.closeWindowAction}><img src={CloseIcon} alt="Icone de fechamento" /></button>
+                        <button onClick={onClose}><img src={CloseIcon} alt="Icone de fechamento" /></button>
                     </div>
                 </div>
                 <div className="popup-body">
-                    {/* {props.Component ? props.Component : props.message ? props.message : "Nada a ser mostrado"} */}
-                    <LoginInputs />
+                    {component ? component : message ? message : "Nada a ser mostrado"}
                 </div>
             </div>
         </span>
