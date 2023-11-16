@@ -1,16 +1,16 @@
 function SingInInputs(params) {
     return (
         <form className="sing-in-form">
-            <div className="input-grid">
+            <div className="input-flex">
                 <input type="text" placeholder="Nome" />
                 <input type="text" placeholder="Sobrenome" />
             </div>
-            <div className="input-grid">
+            <div className="input-flex">
                 <input type="date" placeholder="Data de nascimento" />
                 <input type="tel" placeholder="Telefone" />
             </div>
             <input type="email" placeholder="E-mail" />
-            <div className="input-grid">
+            <div className="input-flex">
                 <input type="password" placeholder="Senha" />
                 <input type="password" placeholder="Confirmar senha" />
             </div>

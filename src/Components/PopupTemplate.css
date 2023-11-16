@@ -20,6 +20,8 @@
 .popup-window {
     background-color: #ccc;
     border-radius: 10px;
+
+    width: minmax(650px, 90vh);
 }
 
 .popup-logo {
@@ -41,8 +43,8 @@
 }
 
 .popup-dialog-image {
-    max-height: 20px;
-    max-width: 20px;
+    max-height: 25px;
+    aspect-ratio: 1/1;
     pointer-events: none;
     user-select: none;
 }
@@ -54,7 +56,7 @@
 
     color: black;
     font-weight: 500;
-    font-size: 25px;
+    font-size: 20px;
 }
 
 .popup-title * {
@@ -114,9 +116,9 @@
     gap: 10px;
 }
 
-.input-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.input-flex {
+    display: flex;
+    flex-direction: row;
     gap: 10px;
 }
 
@@ -127,11 +129,12 @@
 }
 
 .min-width-input {
-    width: 460px;
+    width: 100%;
 }
 
 .input-space-between a {
     color: black;
+    font-size: small;
     font-weight: 500;
 }
 
@@ -140,8 +143,10 @@ input[type="password"],
 input[type="date"],
 input[type="tel"],
 input[type="email"] {
-    min-height: 40px;
-    min-width: 260px;
+    min-height: 10%;
+    max-width: 100%;
+
+    width: 100%;
 
     border-radius: 10px;
 
@@ -155,6 +160,17 @@ input[type="email"] {
     border: none;
     background: #F8F8F8;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 0.4s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="date"]:focus,
+input[type="tel"]:focus,
+input[type="email"]:focus {
+    transition: 0.4s ease;
+    outline: none;
+    transform: translateY(-0.25vh);
 }
 
 input[type="submit"] {
@@ -169,6 +185,32 @@ input[type="submit"] {
     font-weight: 600;
     text-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.25);
 
+    outline: 2px none rgba(0, 163, 192, 0);
+
     background: #F8F8F8;
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: 0.1s ease;
+}
+
+input[type="submit"]:hover {
+    transition: 0.1s;
+    cursor: pointer;
+
+    color: #000;
+
+    background: #e9e4e4;
+}
+
+input[type="submit"]:focus {
+    transition: 0.4s;
+    outline: 2px solid rgb(1, 176, 207);
+}
+
+input[type="submit"]:active {
+    transition: 0.1s;
+    cursor: pointer;
+
+    color: #000;
+
+    background: rgb(250, 245, 245);
 }
