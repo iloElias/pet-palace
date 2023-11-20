@@ -1,4 +1,8 @@
+import React, { useRef } from "react";
+
 function SingInInputs(params) {
+    const ref = useRef();
+
     return (
         <form className="sing-in-form">
             <div className="input-flex">
@@ -6,7 +10,11 @@ function SingInInputs(params) {
                 <input type="text" placeholder="Sobrenome" />
             </div>
             <div className="input-flex">
-                <input type="date" placeholder="Data de nascimento" />
+                <input type="text" placeholder="Data de nascimento"
+                    ref={ref}
+                    onChange={(e) => console.log(e.target.value)}
+                    onFocus={() => (ref.current.type = "date")}
+                    onBlur={() => (ref.current.type = "text")} />
                 <input type="tel" placeholder="Telefone" />
             </div>
             <input type="email" placeholder="E-mail" />
