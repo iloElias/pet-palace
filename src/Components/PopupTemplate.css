@@ -222,3 +222,16 @@ input[type="submit"]:active {
 
     background: rgb(250, 245, 245);
 }
+
+.input-space-between button {
+    border: none;
+    background: none;
+    color: black;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.input-space-between button:hover {
+    color: rgb(16, 38, 83);
+    cursor: pointer;
+}
