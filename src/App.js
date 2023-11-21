@@ -1,9 +1,11 @@
 import { useState } from "react";
-import './App.css';
-import Header from "./Components/Header";
-import { SingInInputs, LoginInputs } from "./Components/AcountInputs"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { SingInInputs, LoginInputs } from "./Components/AcountInputs";
 import PopupTemplate from "./Components/PopupTemplate";
-import userImg from "./images/iconUser.png"
+import userImg from "./images/iconUser.png";
+import Header from "./Components/Header";
+import Home from "./pages/Home";
+import "./App.css";
 
 function App() {
   const [user, setUser] = useState();
@@ -14,14 +16,29 @@ function App() {
   const [userCPF, setUserCPF] = useState();
   const [userTel, setUserTel] = useState();
 
-  let userInfo = { user, userID, userEmail, userPassword, userLastName, userCPF, userTel };
-  let userSetInfo = { setUser, setUserID, setUserEmail, setUserPassword, setUserLastName, setUserCPF, setUserTel };
+  let userInfo = {
+    user,
+    userID,
+    userEmail,
+    userPassword,
+    userLastName,
+    userCPF,
+    userTel,
+  };
+  let userSetInfo = {
+    setUser,
+    setUserID,
+    setUserEmail,
+    setUserPassword,
+    setUserLastName,
+    setUserCPF,
+    setUserTel,
+  };
 
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
 
   const openModal = (type) => {
-    closeModal();
     setModalType(type);
     setModalOpen(true);
   };
@@ -31,27 +48,50 @@ function App() {
     setModalType(null);
   };
 
-
   return (
-    <>
-      <div id="modal-root" className={`modal ${isModalOpen ? "modal-open" : ""}`}>
+    <Router>
+      <div
+        id="modal-root"
+        className={`modal ${isModalOpen ? "modal-open" : ""}`}
+      >
         {isModalOpen ? (
-          <PopupTemplate onClose={closeModal} title={modalType === "signin" ? "Faça seu cadastro" : "Entrar na sua conta"} dialogImg={userImg}
-            component={modalType === "signin" ? <SingInInputs openModal={openModal} userInfo={userInfo} userSetInfo={userSetInfo} /> : <LoginInputs openModal={openModal} userInfo={userInfo} userSetInfo={userSetInfo} />} />
+          <PopupTemplate
+            onClose={closeModal}
+            title={
+              modalType === "signin"
+                ? "Faça seu cadastro"
+                : "Entrar na sua conta"
+            }
+            dialogImg={userImg}
+            component={
+              modalType === "signin" ? (
+                <SingInInputs
+                  openModal={openModal}
+                  userInfo={userInfo}
+                  userSetInfo={userSetInfo}
+                />
+              ) : (
+                <LoginInputs
+                  openModal={openModal}
+                  userInfo={userInfo}
+                  userSetInfo={userSetInfo}
+                />
+              )
+            }
+          />
         ) : (
           <></>
         )}
       </div>
-      <Header openSignInModal={() => openModal("signin")} openLoginModal={() => openModal("login")} />
-      <div className="App">
-        <h1>
-          Meu primeiro app
-        </h1>
-        <p>
-          Esta é a minha primeira aplicação React
-        </p>
-      </div>
-    </>
+      <Header
+        openSignInModal={() => openModal("signin")}
+        openLoginModal={() => openModal("login")}
+      />
+      <Routes>
+        <Route exact path="/" element={<Home userInfo={userInfo} />} />
+        {/* <Route exact path="/login" element={<Home userInfo={userInfo} />} /> kk--Teste-- */}
+      </Routes>
+    </Router>
   );
 }
 
