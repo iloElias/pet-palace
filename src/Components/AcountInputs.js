@@ -1,40 +1,46 @@
-import { auth, createUserWithEmailAndPassword } from "../firebase";
+import { auth, createUserWithEmailAndPassword, db } from "../firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc, getDoc, collection } from "firebase/firestore";
 
-function SingInInputs({ openModal, userInfo, userSetInfo }) {
+function SingInInputs({ openModal, closeModal, userInfo, userSetInfo }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         const { elements } = event.target;
-        const nome = elements.nome.value;
-        const sobrenome = elements.sobrenome.value;
-        const cpf = elements.cpf.value;
-        const telefone = elements.telefone.value;
-        const email = elements.email.value;
-        const senha = elements.senha.value;
-
-        userSetInfo.setUser(nome);
-        userSetInfo.setUserLastName(sobrenome);
-        userSetInfo.setUserCPF(cpf);
-        userSetInfo.setUserTel(telefone);
-        userSetInfo.setUserEmail(email);
-        userSetInfo.setUserPassword(senha);
 
         try {
+            const nome = elements.nome.value;
+            const sobrenome = elements.sobrenome.value;
+            const cpf = elements.cpf.value;
+            const telefone = elements.telefone.value;
+            const email = elements.email.value;
+            const senha = elements.senha.value;
+
+            // Criar usuário no Firebase Authentication
             const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
             const user = userCredential.user;
- 
-            userSetInfo({
-              uid: user.uid,
-              email: user.email,
-            //   nome: user.nome,
-            //   sobrenome: user.sobrenome,
-            //   telefone: user.telefone,
-            //   cpf: user.cpf,
+
+            // Armazenar informações adicionais no Firestore
+            const userDocRef = doc(collection(db, "users"), user.uid);
+            await setDoc(userDocRef, {
+                nome,
+                sobrenome,
+                cpf,
+                telefone,
+                email,
             });
-          } catch (error) {
+
+            userSetInfo({
+                uid: user.uid,
+                email: user.email,
+            });
+
+            {closeModal();}
+        } catch (error) {
             console.error("Erro ao criar usuário:", error.message);
-          }
+        }
     };
+
 
     return (
         <form onSubmit={handleSubmit} className="sing-in-form">
@@ -62,24 +68,57 @@ function SingInInputs({ openModal, userInfo, userSetInfo }) {
     );
 }
 
-function LoginInputs({ params, openModal, userInfo, userSetInfo }) {
-    const handleSubmit = (event) => {
-        event.preventDefault();
 
+function LoginInputs({ openModal, closeModal, userInfo, userSetInfo }) {
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+  
+      const { elements } = event.target;
+  
+      try {
+        const email = elements.email.value;
+        const senha = elements.senha.value;
+  
+        const userCredential = await signInWithEmailAndPassword(auth, email, senha);
+        const user = userCredential.user;
+  
+        const userDocRef = doc(db, "users", user.uid);
+        const userDocSnapshot = await getDoc(userDocRef);
+  
+        if (userDocSnapshot.exists()) {
+          const userData = userDocSnapshot.data();
 
-    };
+          userSetInfo.setUserID(user.uid)
+          userSetInfo.setUserEmail(user.email);
+          userSetInfo.setUser(userData.nome)
+          userSetInfo.setUserLastName(userData.sobrenome)
+  
+          console.log("Login bem-sucedido:", user.email);
+          console.log(`Nome: ${userData.nome}, Sobrenome: ${userData.sobrenome}`);
+        }
+  
+        elements.email.value = "";
+        elements.senha.value = "";
+  
+        {closeModal();}
+      } catch (error) {
+        console.error("Erro ao fazer login:", error.message);
+      }
+    };  
 
     return (
         <form onSubmit={handleSubmit} className="sing-in-form">
-            <input className="min-width-input" type="email" placeholder="E-mail" />
-            <input className="min-width-input" type="password" placeholder="Senha" />
+            <input className="min-width-input" name="email" type="email" placeholder="E-mail" required />
+            <input className="min-width-input" name="senha" type="password" placeholder="Senha" required />
 
             <div className="input-space-between">
                 <input type="submit" value="Fazer Login" />
-                <button onClick={openModal}>Sou novo por aqui...</button>
+                <button type="button" onClick={openModal}>
+                    Sou novo por aqui...
+                </button>
             </div>
         </form>
-    )
+    );
 }
 
 export { SingInInputs, LoginInputs };

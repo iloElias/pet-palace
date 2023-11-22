@@ -47,7 +47,7 @@ function App() {
     userCPF,
     userTel,
   };
-  
+
   let userSetInfo = {
     setUser,
     setUserID,
@@ -90,12 +90,14 @@ function App() {
               modalType === "signin" ? (
                 <SingInInputs
                   openModal={openModal}
+                  closeModal={closeModal}
                   userInfo={userInfo}
                   userSetInfo={userSetInfo}
                 />
               ) : (
                 <LoginInputs
                   openModal={openModal}
+                  closeModal={closeModal}
                   userInfo={userInfo}
                   userSetInfo={userSetInfo}
                 />
