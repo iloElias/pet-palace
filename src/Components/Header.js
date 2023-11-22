@@ -1,12 +1,13 @@
 import Logo from "./Logo"
 import Menu from "./Menu"
+import { Link } from "react-router-dom"
 
 function Header({ openSignInModal, openLoginModal }) {
     return (
         <header>
-            <a className="company-logo" href="/Home">
+            <Link to="/" className="company-logo" >
                 <Logo />
-            </a>
+            </Link>
             <div className="menu">
                 <Menu openSignInModal={openSignInModal} openLoginModal={openLoginModal} />
             </div>

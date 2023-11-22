@@ -4,7 +4,9 @@
   box-sizing: border-box;
   color: #fff;
 }
-
+.no-margin {
+  margin: 0;
+}
 html,
 body,
 #root {
@@ -17,11 +19,14 @@ body {
   justify-content: center;
 
   background-color: #393939;
+
+  overflow: hidden;
 }
 
-
-
 header {
+  position: fixed;
+  z-index: 10;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -45,15 +50,6 @@ header {
   pointer-events: none;
 }
 
-.menu {
-  display: flex;
-  flex-direction: row;
-}
-
-.menu * {
-  margin: 1vh;
-}
-
 .modal-root {
   display: none;
 }
@@ -63,22 +59,80 @@ header {
 }
 
 .App {
+  position: absolute;
+  z-index: 5;
   display: flex;
   align-items: center;
   flex-direction: column;
 
-  padding-top: 30px;
-
   width: 100%;
+  height: 100%;
+}
+.home-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  padding: 70px;
 }
 
+.app-background {
+  position: absolute;
+  z-index: -1;
+
+  object-fit: cover;
+  filter: brightness(0.6) blur(0.25vh);
+  width: 100%;
+  height: 100%;
+}
+
+.menu {
+  display: flex;
+  justify-content: space-between;
+}
 .menu-button {
   background: transparent;
   outline: none;
   border: none;
+  text-decoration: none;
+
+  margin-right: 15px;
+
+  font-size: 15px;
 }
 
 .menu-button:hover {
   cursor: pointer;
   text-decoration: underline;
+}
+
+.not-found-page {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  height: 100%;
+  padding: 20vh;
+}
+
+@keyframes float {
+  0% {
+    transform: translatey(0vh);
+  }
+  50% {
+    transform: translatey(-2.5vh);
+  }
+  100% {
+    transform: translatey(0vh);
+  }
+}
+
+.not-found-page img {
+  filter: invert(100%);
+  height: 25vh;
+  animation: float 5s ease-in-out infinite;
+}
+
+.not-found-page h1 {
+  font-size: 3vh;
 }
