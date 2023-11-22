@@ -14,12 +14,11 @@ function PopupTemplate({ onClose, dialogImg, title, component, message }) {
 
   const backgroundAnimationProps = useSpring({
     opacity: 1,
-    top: 0,
-    from: { opacity: 0, top: 50 },
+    from: { opacity: 0 },
   });
 
   return (
-    <animated.span className="popup-modal">
+    <animated.span style={backgroundAnimationProps} className="popup-modal">
       <animated.div style={windowAnimationProps} className="popup-window">
         <div className="popup-header">
           <div className="popup-logo">

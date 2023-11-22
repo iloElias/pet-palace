@@ -1,11 +1,36 @@
-import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { SignInInputs, LoginInputs } from "./Components/AcountInputs";
+import { useState } from "react";
 import PopupTemplate from "./Components/PopupTemplate";
 import userImg from "./images/iconUser.png";
+import notFoundImg from "./images/notFound.png";
 import Header from "./Components/Header";
 import Home from "./pages/Home";
 import "./App.css";
+
+function NotFound() {
+  return (
+    <div className="not-found">
+      <div className="not-found-container">
+        <img src={notFoundImg} alt="" />
+        <h1>404 - Página não encontrada</h1>
+        <p>
+          A página na qual voce foi redirecionado, não pode ser encontrada ou
+          está desativada
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function DefaultLayout({ children, header }) {
+  return (
+    <>
+      {header}
+      {children}
+    </>
+  );
+}
 
 function App() {
   const [user, setUser] = useState();
@@ -83,12 +108,24 @@ function App() {
           />
         )}
       </div>
-      <Header
-        openSignInModal={() => openModal("signin")}
-        openLoginModal={() => openModal("login")}
-      />
       <Routes>
-        <Route exact path="/" element={<Home userInfo={userInfo} />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <DefaultLayout
+              header={
+                <Header
+                  openSignInModal={() => openModal("signin")}
+                  openLoginModal={() => openModal("login")}
+                />
+              }
+            >
+              <Home userInfo={userInfo} />
+            </DefaultLayout>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
         {/* <Route exact path="/login" element={<Home userInfo={userInfo} />} /> kk--Teste-- */}
       </Routes>
     </Router>
