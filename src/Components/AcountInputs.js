@@ -30,10 +30,10 @@ function SingInInputs({ openModal, closeModal, userInfo, userSetInfo }) {
                 email,
             });
 
-            userSetInfo({
-                uid: user.uid,
-                email: user.email,
-            });
+            userSetInfo.setUserID(user.uid)
+            userSetInfo.setUserEmail(user.email);
+            userSetInfo.setUser(nome)
+            userSetInfo.setUserLastName(sobrenome)
 
             {closeModal();}
         } catch (error) {
