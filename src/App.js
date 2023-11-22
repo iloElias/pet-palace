@@ -1,34 +1,12 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { SingInInputs, LoginInputs } from "./Components/AcountInputs";
+import { SignInInputs, LoginInputs } from "./Components/AcountInputs";
 import PopupTemplate from "./Components/PopupTemplate";
 import userImg from "./images/iconUser.png";
-import notFound from "./images/notFound.png";
 import Header from "./Components/Header";
 import Home from "./pages/Home";
 import "./App.css";
 
-function NotFound() {
-  return (
-    <div className="not-found-page">
-      <img src={notFound} alt="Imagem não encontrada"/>
-      <h1>404 - Página não encontrada</h1>
-    </div>
-  );
-}
-
-function DefaultLayout({ children , openModal }) {
-  return (
-    <>
-      <Header
-        openSignInModal={() => openModal("signin")}
-        openLoginModal={() => openModal("login")}/>
-      <>
-        {children}
-      </>
-    </>
-  );
-}
 function App() {
   const [user, setUser] = useState();
   const [userID, setUserID] = useState();
@@ -47,7 +25,6 @@ function App() {
     userCPF,
     userTel,
   };
-
   let userSetInfo = {
     setUser,
     setUserID,
@@ -77,7 +54,7 @@ function App() {
         id="modal-root"
         className={`modal ${isModalOpen ? "modal-open" : ""}`}
       >
-        {isModalOpen ? (
+        {isModalOpen && (
           <PopupTemplate
             onClose={closeModal}
             title={
@@ -88,7 +65,7 @@ function App() {
             dialogImg={userImg}
             component={
               modalType === "signin" ? (
-                <SingInInputs
+                <SignInInputs
                   openModal={openModal}
                   closeModal={closeModal}
                   userInfo={userInfo}
@@ -104,13 +81,15 @@ function App() {
               )
             }
           />
-        ) : (
-          <></>
         )}
       </div>
+      <Header
+        openSignInModal={() => openModal("signin")}
+        openLoginModal={() => openModal("login")}
+      />
       <Routes>
-        <Route exact path="/" element={ <DefaultLayout openModal={openModal}><Home userInfo={userInfo} /></DefaultLayout>} />
-        <Route path="*" element={<NotFound />} />
+        <Route exact path="/" element={<Home userInfo={userInfo} />} />
+        {/* <Route exact path="/login" element={<Home userInfo={userInfo} />} /> kk--Teste-- */}
       </Routes>
     </Router>
   );

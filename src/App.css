@@ -4,9 +4,11 @@
   box-sizing: border-box;
   color: #fff;
 }
+
 .no-margin {
   margin: 0;
 }
+
 html,
 body,
 #root {
@@ -50,13 +52,7 @@ header {
   pointer-events: none;
 }
 
-.modal-root {
-  display: none;
-}
 
-.modal-open {
-  display: block;
-}
 
 .App {
   position: absolute;
@@ -68,12 +64,17 @@ header {
   width: 100%;
   height: 100%;
 }
+
 .home-info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  
+
   padding: 70px;
+}
+
+.home-info :where(h1, p) {
+  text-align: center;
 }
 
 .app-background {
@@ -90,6 +91,7 @@ header {
   display: flex;
   justify-content: space-between;
 }
+
 .menu-button {
   background: transparent;
   outline: none;
@@ -119,9 +121,11 @@ header {
   0% {
     transform: translatey(0vh);
   }
+
   50% {
     transform: translatey(-2.5vh);
   }
+
   100% {
     transform: translatey(0vh);
   }
