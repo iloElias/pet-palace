@@ -5,6 +5,7 @@ import PopupTemplate from "./Components/PopupTemplate";
 import userImg from "./images/iconUser.png";
 import notFoundImg from "./images/notFound.png";
 import Header from "./Components/Header";
+import Administracao from "./pages/Administracao";
 import Home from "./pages/Home";
 import "./App.css";
 
@@ -88,7 +89,7 @@ function App() {
                 : "Entrar na sua conta"
             }
             dialogImg={userImg}
-            component={
+            children={
               modalType === "signin" ? (
                 <SignInInputs
                   openModal={openModal}
@@ -122,6 +123,23 @@ function App() {
               }
             >
               <Home userInfo={userInfo} />
+            </DefaultLayout>
+          }
+        />
+
+        <Route
+          exact
+          path="/administracao"
+          element={
+            <DefaultLayout
+              header={
+                <Header
+                  openSignInModal={() => openModal("signin")}
+                  openLoginModal={() => openModal("login")}
+                />
+              }
+            >
+              <Administracao userInfo={userInfo} />
             </DefaultLayout>
           }
         />

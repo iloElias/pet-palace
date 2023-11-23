@@ -39,9 +39,9 @@ function SignInInputs({ openModal, closeModal, userInfo, userSetInfo }) {
       userSetInfo.setUser(nome);
       userSetInfo.setUserLastName(sobrenome);
 
-      {
-        closeModal();
-      }
+
+      closeModal();
+
     } catch (error) {
       console.error("Erro ao criar usuário:", error.message);
     }
@@ -108,9 +108,9 @@ function LoginInputs({ openModal, closeModal, userInfo, userSetInfo }) {
       elements.email.value = "";
       elements.senha.value = "";
 
-      {
-        closeModal();
-      }
+
+      closeModal();
+
     } catch (error) {
       console.error("Erro ao fazer login:", error.message);
     }
