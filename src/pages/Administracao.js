@@ -1,11 +1,15 @@
-import PopupTemplate from "../Components/PopupTemplate";
+import OptionCard from "../Components/OptionCard";
+// import PopupTemplate from "../Components/PopupTemplate";
 
-function Administracao(params) {
+function Administracao({params}) {
 
     return (
         <div className="administration-page">
-            <PopupTemplate title={"Cadastro de serviço"}></PopupTemplate>
-            <PopupTemplate title={"Cadastro de funcionario"}></PopupTemplate>
+
+            <OptionCard/>
+            
+            {/* <PopupTemplate title={"Cadastro de serviço"}></PopupTemplate>
+            <PopupTemplate title={"Cadastro de funcionario"}></PopupTemplate> */}
         </div>
     )
 }

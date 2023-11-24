@@ -157,6 +157,58 @@ header {
   padding: 20vh;
 }
 
+.option-card {
+  text-decoration: none;
+}
+
+.option-card-container {
+  transition: 0.5s ease;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
+
+  padding: 0.75vh;
+
+  height: 35vh;
+  max-height: 35vh;
+  aspect-ratio: 2/3;
+
+  border-radius: 1vh;
+
+  background-color: #2b2b2b;
+}
+
+.option-card-container:hover {
+  transform: translateY(-1vh);
+  box-shadow: 0px 2px 10px 0px rgba(0, 0, 0, 0.25);
+}
+
+.option-card-container :where(h1, p) {
+  width: 100%;
+  color: #fff;
+  
+  border-radius: 1vh;
+  
+  text-align: center;
+  text-decoration: none;
+  background-color: #393939;
+}
+
+.option-card-container h1 {
+  font-size: 4vh;
+}
+
+.option-card-container p {
+  font-size: 2vh;
+  min-height: 40%;
+  text-align: start;
+  text-indent: 2vh;
+}
+
 @keyframes float {
   0% {
     transform: translatey(0vh);
