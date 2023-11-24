@@ -45,6 +45,10 @@ function SignInInputs({ openModal, closeModal, userInfo, userSetInfo }) {
     }
   };
 
+  const openModalHandler = () => {
+    openModal("login");
+  };
+
   return (
     <form onSubmit={handleSubmit} className="sing-in-form">
       <div className="input-flex">
@@ -63,7 +67,7 @@ function SignInInputs({ openModal, closeModal, userInfo, userSetInfo }) {
 
       <div className="input-space-between">
         <input type="submit" value="Realizar cadastro" />
-        <button type="button" onClick={openModal}>
+        <button type="button" onClick={openModalHandler}>
           Já tenho conta...
         </button>
       </div>
@@ -112,6 +116,10 @@ function LoginInputs({ openModal, closeModal, userInfo, userSetInfo }) {
     }
   };
 
+  const openModalHandler = () => {
+    openModal("signin");
+  };
+
   return (
     <form onSubmit={handleSubmit} className="sing-in-form">
       <input
@@ -131,7 +139,7 @@ function LoginInputs({ openModal, closeModal, userInfo, userSetInfo }) {
 
       <div className="input-space-between">
         <input type="submit" value="Fazer Login" />
-        <button type="button" onClick={openModal("signin")}>
+        <button type="button" onClick={openModalHandler}>
           Sou novo por aqui...
         </button>
       </div>
