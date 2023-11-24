@@ -39,9 +39,7 @@ function SignInInputs({ openModal, closeModal, userInfo, userSetInfo }) {
       userSetInfo.setUser(nome);
       userSetInfo.setUserLastName(sobrenome);
 
-
       closeModal();
-
     } catch (error) {
       console.error("Erro ao criar usuário:", error.message);
     }
@@ -108,9 +106,7 @@ function LoginInputs({ openModal, closeModal, userInfo, userSetInfo }) {
       elements.email.value = "";
       elements.senha.value = "";
 
-
       closeModal();
-
     } catch (error) {
       console.error("Erro ao fazer login:", error.message);
     }
@@ -135,7 +131,7 @@ function LoginInputs({ openModal, closeModal, userInfo, userSetInfo }) {
 
       <div className="input-space-between">
         <input type="submit" value="Fazer Login" />
-        <button type="button" onClick={openModal}>
+        <button type="button" onClick={openModal("signin")}>
           Sou novo por aqui...
         </button>
       </div>
