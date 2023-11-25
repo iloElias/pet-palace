@@ -133,9 +133,13 @@ header {
 
 .administration-page {
   display: flex;
-  flex-direction: column;
+
+  justify-content: center;
   align-items: center;
-  padding: 5vw 0 5vw 0;
+
+  gap: 1.2vh;
+
+  padding: 100px 0 5vw 0;
 
   overflow: hidden;
   overflow-y: auto;
@@ -190,16 +194,20 @@ header {
 .option-card-container :where(h1, p) {
   width: 100%;
   color: #fff;
-  
+
   border-radius: 1vh;
-  
+
+  user-select: none;
+
+  padding: 0.5vh;
+
   text-align: center;
   text-decoration: none;
   background-color: #393939;
 }
 
 .option-card-container h1 {
-  font-size: 4vh;
+  font-size: 3.5vh;
 }
 
 .option-card-container p {
@@ -207,6 +215,51 @@ header {
   min-height: 40%;
   text-align: start;
   text-indent: 2vh;
+}
+
+.div-servicos {
+  max-height: 100%;
+  min-height: 100%;
+
+  padding-top: 80px;
+
+  overflow: hidden;
+  overflow-y: scroll;
+
+  display: flex;
+  justify-content: center;
+}
+
+.servicos-container { 
+  display: flex;
+  flex-direction: column;
+}
+
+.ul-list {
+  display: flex;
+  flex-direction: column;
+
+  margin: 5vh 0;
+  gap: 1vh;
+}
+
+.item-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  gap: 1vh;
+
+  padding: 2vh;
+  max-width: 60vw;
+  background-color: #2b2b2b;
+  border-radius: 1vh;
+}
+
+.item-container :is(strong, p) {
+  padding: 10px 5px;
+  background-color: #393939;
+  border-radius: 1vh;
 }
 
 @keyframes float {

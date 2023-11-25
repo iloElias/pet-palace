@@ -4,7 +4,10 @@ import { useSpring, animated } from "react-spring";
 function OptionCard({ routeLink, title, description }) {
     const cardAnimation = useSpring({
         from: { opacity: 0, top: 50 },
-        to: { opacity: 1, top: 0 }
+        to: { opacity: 1, top: 0 },
+        config: {
+            duration: 200, // duration for the whole animation form start to end
+        },
     });
 
 

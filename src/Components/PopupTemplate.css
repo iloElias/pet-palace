@@ -140,6 +140,13 @@
     gap: 10px;
 }
 
+.create-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    min-width: 65vh;
+}
+
 .input-flex {
     display: flex;
     flex-direction: row;
@@ -162,10 +169,13 @@
     font-weight: 500;
 }
 
+textarea, 
 input[type="text"],
 input[type="password"],
 input[type="date"],
+input[type="time"],
 input[type="tel"],
+input[type="number"],
 input[type="email"] {
     min-height: 10%;
     max-width: 100%;
@@ -186,19 +196,27 @@ input[type="email"] {
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
     transition: all 0.4s ease;
 }
+textarea {
+    transition: none;
+    resize: vertical;
+}
 
+textarea::placeholder,
 input[type="text"]::placeholder,
 input[type="password"]::placeholder,
+input[type="time"]::placeholder,
 input[type="date"]::placeholder,
+input[type="number"]::placeholder,
 input[type="tel"]::placeholder,
 input[type="email"]::placeholder {
     color: #757575;
     text-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.25);
 }
-
 input[type="text"]:focus,
 input[type="password"]:focus,
+input[type="time"]:focus,
 input[type="date"]:focus,
+input[type="number"]:focus,
 input[type="tel"]:focus,
 input[type="email"]:focus {
     transition: 0.4s ease;
@@ -206,7 +224,7 @@ input[type="email"]:focus {
     transform: translateY(-0.25vh);
 }
 
-input[type="submit"] {
+input[type="submit"], .button {
     border: none;
     color: #000;
 
@@ -225,7 +243,7 @@ input[type="submit"] {
     transition: 0.1s ease;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover, .button:hover {
     transition: 0.1s;
     cursor: pointer;
 
@@ -234,12 +252,12 @@ input[type="submit"]:hover {
     background: #e9e4e4;
 }
 
-input[type="submit"]:focus {
+input[type="submit"]:focus, .button:focus {
     transition: 0.4s;
     outline: 2px solid rgb(1, 176, 207);
 }
 
-input[type="submit"]:active {
+input[type="submit"]:active, .button:active {
     transition: 0.1s;
     cursor: pointer;
 

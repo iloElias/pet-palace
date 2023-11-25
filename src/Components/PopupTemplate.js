@@ -21,7 +21,7 @@ function InnerWindow({ dialogImg, title, onClose, children, message }) {
               alt="Imagem de Dialogo"
             />
           ) : (
-            ""
+            <></>
           )}
           {title ? title : "Caixa de dialogo"}
         </div>
@@ -42,14 +42,14 @@ function InnerWindow({ dialogImg, title, onClose, children, message }) {
 
 function PopupTemplate({ children, onClose, dialogImg, title, message }) {
   const windowAnimationProps = useSpring({
-    opacity: 1,
-    top: 0,
     from: { opacity: 0, top: 50 },
+    to: {opacity: 1, top: 0},
+    leave: { opacity: 0 },
   });
 
   const backgroundAnimationProps = useSpring({
-    opacity: 1,
     from: { opacity: 0 },
+    to: {opacity: 1}
   });
 
   return (
@@ -62,8 +62,8 @@ function PopupTemplate({ children, onClose, dialogImg, title, message }) {
             </animated.div>
           </animated.span>
         ) : (
-          <span style={backgroundAnimationProps} className="generic-window">
-            <div style={windowAnimationProps} className="popup-window">
+          <span className="generic-window">
+            <div className="popup-window">
               <InnerWindow onClose={onClose} dialogImg={dialogImg} title={title} children={children} message={message} />
             </div>
           </span>

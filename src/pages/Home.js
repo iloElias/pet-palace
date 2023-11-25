@@ -1,4 +1,5 @@
 import backgroundImg from "../images/petPalaceWallpaper.jpg";
+import Administracao from "./Administracao";
 
 function Home({ userInfo }) {
   return (
@@ -14,6 +15,7 @@ function Home({ userInfo }) {
             <>
               <h1>{`Ola ${userInfo.user}, estavamos te esperando`}</h1>
               <p>Quais são os planos para hoje?</p>
+              <Administracao/>
             </>
           )}
         </div>

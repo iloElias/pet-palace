@@ -6,6 +6,7 @@ import userImg from "./images/iconUser.png";
 import notFoundImg from "./images/notFound.png";
 import Header from "./Components/Header";
 import Administracao from "./pages/Administracao";
+import {CadastroFuncionarios , CadastroServicos, GerenciarFuncionarios, GerenciarServicos} from "./pages/ControleGeral";
 import Home from "./pages/Home";
 import "./App.css";
 
@@ -119,6 +120,7 @@ function App() {
                 <Header
                   openSignInModal={() => openModal("signin")}
                   openLoginModal={() => openModal("login")}
+                  user={user}
                 />
               }
             >
@@ -136,6 +138,7 @@ function App() {
                 <Header
                   openSignInModal={() => openModal("signin")}
                   openLoginModal={() => openModal("login")}
+                  user={user}
                 />
               }
             >
@@ -143,6 +146,81 @@ function App() {
             </DefaultLayout>
           }
         />
+
+<Route
+          exact
+          path="/administracao/servicos"
+          element={
+            <DefaultLayout
+              header={
+                <Header
+                  openSignInModal={() => openModal("signin")}
+                  openLoginModal={() => openModal("login")}
+                  user={user}
+                />
+              }
+            >
+              <GerenciarServicos userInfo={userInfo} />
+            </DefaultLayout>
+          }
+        />
+
+        <Route
+          exact
+          path="/administracao/funcionarios"
+          element={
+            <DefaultLayout
+              header={
+                <Header
+                  openSignInModal={() => openModal("signin")}
+                  openLoginModal={() => openModal("login")}
+                  user={user}
+                />
+              }
+            >
+              <GerenciarFuncionarios userInfo={userInfo} />
+            </DefaultLayout>
+          }
+        />
+
+        <Route
+          exact
+          path="/administracao/cadastro/servicos"
+          element={
+            <DefaultLayout
+              header={
+                <Header
+                  openSignInModal={() => openModal("signin")}
+                  openLoginModal={() => openModal("login")}
+                  user={user}
+                />
+              }
+            >
+              <CadastroServicos userInfo={userInfo} />
+              <Administracao/>
+            </DefaultLayout>
+          }
+        />
+
+        <Route
+          exact
+          path="/administracao/cadastro/funcionarios"
+          element={
+            <DefaultLayout
+              header={
+                <Header
+                  openSignInModal={() => openModal("signin")}
+                  openLoginModal={() => openModal("login")}
+                  user={user}
+                />
+              }
+            >
+              <CadastroFuncionarios userInfo={userInfo} />
+              <Administracao/>
+            </DefaultLayout>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
         {/* <Route exact path="/login" element={<Home userInfo={userInfo} />} /> kk--Teste-- */}
       </Routes>

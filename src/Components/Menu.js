@@ -1,13 +1,21 @@
 
-function Menu({ openSignInModal, openLoginModal }) {
+function Menu({ openSignInModal, openLoginModal, user }) {
   return (
     <>
-      <button className="menu-button" onClick={openLoginModal}>
-        Login
-      </button>
-      <button className="menu-button" onClick={openSignInModal}>
-        Sign-in
-      </button>
+      {
+        user ? (
+          <></>
+        ) : (
+          <>
+            <button className="menu-button" onClick={openLoginModal}>
+              Login
+            </button>
+            <button className="menu-button" onClick={openSignInModal}>
+              Sign-in
+            </button>
+          </>
+        )
+      }
     </>
   );
 }
