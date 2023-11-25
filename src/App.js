@@ -6,7 +6,7 @@ import userImg from "./images/iconUser.png";
 import notFoundImg from "./images/notFound.png";
 import Header from "./Components/Header";
 import Administracao from "./pages/Administracao";
-import {CadastroFuncionarios , CadastroServicos, GerenciarFuncionarios, GerenciarServicos} from "./pages/ControleGeral";
+import { CadastroFuncionarios, CadastroServicos, GerenciarFuncionarios, GerenciarServicos } from "./pages/ControleGeral";
 import Home from "./pages/Home";
 import "./App.css";
 
@@ -61,54 +61,55 @@ function App() {
     setUserCPF,
     setUserTel,
   };
-
+  
+  
   const [isModalOpen, setModalOpen] = useState(false);
   const [modalType, setModalType] = useState(null);
-
+  
   const openModal = (type) => {
     setModalType(type);
     setModalOpen(true);
   };
-
+  
   const closeModal = () => {
     setModalOpen(false);
     setModalType(null);
   };
-
+  
   return (
     <Router>
       <div
         id="modal-root"
         className={`modal ${isModalOpen ? "modal-open" : ""}`}
-      >
+        >
         {isModalOpen && (
           <PopupTemplate
-            onClose={closeModal}
-            title={
-              modalType === "signin"
-                ? "Faça seu cadastro"
-                : "Entrar na sua conta"
-            }
-            dialogImg={userImg}
-            children={
-              modalType === "signin" ? (
-                <SignInInputs
-                  openModal={openModal}
-                  closeModal={closeModal}
-                  userInfo={userInfo}
-                  userSetInfo={userSetInfo}
-                />
+          onClose={closeModal}
+          title={
+            modalType === "signin"
+            ? "Faça seu cadastro"
+            : "Entrar na sua conta"
+          }
+          dialogImg={userImg}
+          children={
+            modalType === "signin" ? (
+              <SignInInputs
+              openModal={openModal}
+              closeModal={closeModal}
+              userInfo={userInfo}
+              userSetInfo={userSetInfo}
+              />
               ) : (
                 <LoginInputs
-                  openModal={openModal}
-                  closeModal={closeModal}
-                  userInfo={userInfo}
-                  userSetInfo={userSetInfo}
+                openModal={openModal}
+                closeModal={closeModal}
+                userInfo={userInfo}
+                userSetInfo={userSetInfo}
                 />
-              )
-            }
-          />
-        )}
+                )
+              }
+              />
+              )}
       </div>
       <Routes>
         <Route
@@ -116,110 +117,110 @@ function App() {
           path="/"
           element={
             <DefaultLayout
-              header={
-                <Header
-                  openSignInModal={() => openModal("signin")}
-                  openLoginModal={() => openModal("login")}
-                  user={user}
-                />
-              }
+            header={
+              <Header
+              openSignInModal={() => openModal("signin")}
+              openLoginModal={() => openModal("login")}
+              user={user}
+              />
+            }
             >
               <Home userInfo={userInfo} />
             </DefaultLayout>
           }
-        />
+          />
 
         <Route
           exact
           path="/administracao"
           element={
             <DefaultLayout
-              header={
-                <Header
-                  openSignInModal={() => openModal("signin")}
-                  openLoginModal={() => openModal("login")}
-                  user={user}
-                />
-              }
+            header={
+              <Header
+              openSignInModal={() => openModal("signin")}
+              openLoginModal={() => openModal("login")}
+              user={user}
+              />
+            }
             >
               <Administracao userInfo={userInfo} />
             </DefaultLayout>
           }
-        />
+          />
 
-<Route
+        <Route
           exact
           path="/administracao/servicos"
           element={
             <DefaultLayout
-              header={
-                <Header
-                  openSignInModal={() => openModal("signin")}
-                  openLoginModal={() => openModal("login")}
-                  user={user}
-                />
-              }
+            header={
+              <Header
+              openSignInModal={() => openModal("signin")}
+              openLoginModal={() => openModal("login")}
+              user={user}
+              />
+            }
             >
               <GerenciarServicos userInfo={userInfo} />
             </DefaultLayout>
           }
-        />
+          />
 
         <Route
           exact
           path="/administracao/funcionarios"
           element={
             <DefaultLayout
-              header={
-                <Header
-                  openSignInModal={() => openModal("signin")}
-                  openLoginModal={() => openModal("login")}
-                  user={user}
-                />
-              }
+            header={
+              <Header
+              openSignInModal={() => openModal("signin")}
+              openLoginModal={() => openModal("login")}
+              user={user}
+              />
+            }
             >
               <GerenciarFuncionarios userInfo={userInfo} />
             </DefaultLayout>
           }
-        />
+          />
 
         <Route
           exact
           path="/administracao/cadastro/servicos"
           element={
             <DefaultLayout
-              header={
-                <Header
-                  openSignInModal={() => openModal("signin")}
-                  openLoginModal={() => openModal("login")}
-                  user={user}
-                />
-              }
+            header={
+              <Header
+              openSignInModal={() => openModal("signin")}
+              openLoginModal={() => openModal("login")}
+              user={user}
+              />
+            }
             >
               <CadastroServicos userInfo={userInfo} />
-              <Administracao/>
+              <Administracao />
             </DefaultLayout>
           }
-        />
+          />
 
         <Route
           exact
           path="/administracao/cadastro/funcionarios"
           element={
             <DefaultLayout
-              header={
-                <Header
-                  openSignInModal={() => openModal("signin")}
-                  openLoginModal={() => openModal("login")}
-                  user={user}
-                />
-              }
+            header={
+              <Header
+              openSignInModal={() => openModal("signin")}
+              openLoginModal={() => openModal("login")}
+              user={user}
+              />
+            }
             >
               <CadastroFuncionarios userInfo={userInfo} />
-              <Administracao/>
+              <Administracao />
             </DefaultLayout>
           }
-        />
+          />
 
         <Route path="*" element={<NotFound />} />
         {/* <Route exact path="/login" element={<Home userInfo={userInfo} />} /> kk--Teste-- */}
