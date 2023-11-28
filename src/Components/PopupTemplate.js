@@ -44,7 +44,6 @@ function PopupTemplate({ children, onClose, dialogImg, title, message }) {
   const windowAnimationProps = useSpring({
     from: { opacity: 0, top: 50 },
     to: {opacity: 1, top: 0},
-    leave: { opacity: 0 },
   });
 
   const backgroundAnimationProps = useSpring({

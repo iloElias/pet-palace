@@ -113,7 +113,7 @@ function GerenciarServicos() {
             </div>
 
             {isEditModalOpen && (
-                <PopupTemplate title={"Editar Serviço"} onClose={handleCloseEditModal}>
+                <PopupTemplate title={"Editar Serviço"} onClose={handleCloseEditModal} isOpen={true} >
                     <ServicesInputs initialData={selectedService} onSubmit={handleEditService} action="edit" />
                 </PopupTemplate>
             )}
