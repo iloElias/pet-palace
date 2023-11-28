@@ -1,10 +1,9 @@
-// import { useSpring, animated } from "react-spring";
-import { useEffect, useState } from "react";
-import { collection, getDocs, doc, deleteDoc } from "firebase/firestore";
+import { useState, useEffect } from "react";
+import { collection, getDocs, doc, deleteDoc, updateDoc } from "firebase/firestore";
 import { Link } from "react-router-dom";
 import { db } from "../firebase";
 import PopupTemplate from "../Components/PopupTemplate";
-import { ServicesInputs, EmployeesInputs } from "../Components/ProductionInputs"
+import { ServicesInputs, EmployeesInputs } from "../Components/ProductionInputs";
 
 function CadastroServicos({ params }) {
     return (
@@ -28,6 +27,8 @@ function CadastroFuncionarios({ params }) {
 
 function GerenciarServicos() {
     const [servicesList, setServicesList] = useState([]);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedService, setSelectedService] = useState(null);
 
     useEffect(() => {
         const fetchServices = async () => {
@@ -59,7 +60,30 @@ function GerenciarServicos() {
         }
     };
 
-    // Adicione a funcionalidade de edição, se necessário
+    const handleOpenEditModal = (service) => {
+        setSelectedService(service);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setIsEditModalOpen(false);
+        setSelectedService(null);
+    };
+
+    const handleEditService = async (updatedService) => {
+        try {
+            const serviceDocRef = doc(db, "services", selectedService.id);
+            await updateDoc(serviceDocRef, updatedService);
+            setServicesList((prevList) =>
+                prevList.map((service) =>
+                    service.id === selectedService.id ? { ...service, ...updatedService } : service
+                )
+            );
+            handleCloseEditModal();
+        } catch (error) {
+            console.error("Erro ao editar serviço:", error.message);
+        }
+    };
 
     return (
         <div className="div-servicos">
@@ -76,19 +100,31 @@ function GerenciarServicos() {
                             <p>Duração Estimada: {service.expectedTime}</p>
                             <p>Preço: {service.price}</p>
                             <div className="buttons-container">
-                                <button className="button" onClick={() => handleDeleteService(service.id)}>Excluir</button>
+                                <button className="button" onClick={() => handleDeleteService(service.id)}>
+                                    Excluir
+                                </button>
+                                <button className="button" onClick={() => handleOpenEditModal(service)}>
+                                    Editar
+                                </button>
                             </div>
-                            {/* Adicione um botão para a funcionalidade de edição aqui */}
                         </div>
                     ))}
                 </ul>
             </div>
+
+            {isEditModalOpen && (
+                <PopupTemplate title={"Editar Serviço"} onClose={handleCloseEditModal}>
+                    <ServicesInputs initialData={selectedService} onSubmit={handleEditService} action="edit" />
+                </PopupTemplate>
+            )}
         </div>
     );
 }
 
 function GerenciarFuncionarios() {
     const [employeesList, setEmployeesList] = useState([]);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+    const [selectedEmployee, setSelectedEmployee] = useState(null);
 
     useEffect(() => {
         const fetchEmployees = async () => {
@@ -120,14 +156,37 @@ function GerenciarFuncionarios() {
         }
     };
 
-    // Adicione a funcionalidade de edição, se necessário
+    const handleOpenEditModal = (employee) => {
+        setSelectedEmployee(employee);
+        setIsEditModalOpen(true);
+    };
+
+    const handleCloseEditModal = () => {
+        setSelectedEmployee(null);
+        setIsEditModalOpen(false);
+    };
+
+    const handleEditEmployee = async (updatedEmployee) => {
+        try {
+            const employeeDocRef = doc(db, "employees", selectedEmployee.id);
+            await updateDoc(employeeDocRef, updatedEmployee);
+            setEmployeesList((prevList) =>
+                prevList.map((employee) =>
+                    employee.id === selectedEmployee.id ? { ...employee, ...updatedEmployee } : employee
+                )
+            );
+            handleCloseEditModal();
+        } catch (error) {
+            console.error("Erro ao editar funcionário:", error.message);
+        }
+    };
 
     return (
         <div className="div-servicos">
             <div className="servicos-container">
                 <div>
                     <h2>Gerenciar Funcionários</h2>
-                    <Link to={"/administracao/cadastro/funcionarios"}>Cadastrar serviço</Link>
+                    <Link to={"/administracao/cadastro/funcionarios"}>Cadastrar funcionário</Link>
                 </div>
                 <ul className="ul-list">
                     {employeesList.map((employee) => (
@@ -139,13 +198,23 @@ function GerenciarFuncionarios() {
                             <p>Número de Telefone: {employee.employeePhoneNumber}</p>
                             <p>Endereço: {employee.employeeAddress}</p>
                             <div className="buttons-container">
-                                <button className="button" onClick={() => handleDeleteEmployee(employee.id)}>Excluir</button>
+                                <button className="button" onClick={() => handleDeleteEmployee(employee.id)}>
+                                    Excluir
+                                </button>
+                                <button className="button" onClick={() => handleOpenEditModal(employee)}>
+                                    Editar
+                                </button>
                             </div>
-                            {/* Adicione um botão para a funcionalidade de edição aqui */}
                         </div>
                     ))}
                 </ul>
             </div>
+
+            {isEditModalOpen && (
+                <PopupTemplate title={"Editar Funcionário"} onClose={handleCloseEditModal}>
+                    <EmployeesInputs initialData={selectedEmployee} onSubmit={handleEditEmployee} />
+                </PopupTemplate>
+            )}
         </div>
     );
 }

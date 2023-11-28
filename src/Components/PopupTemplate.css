@@ -1,5 +1,5 @@
 .popup-modal {
-    position: fixed;
+    position: absolute;
     z-index: 100;
 
     display: flex;
@@ -169,7 +169,7 @@
     font-weight: 500;
 }
 
-textarea, 
+textarea,
 input[type="text"],
 input[type="password"],
 input[type="date"],
@@ -196,6 +196,7 @@ input[type="email"] {
     box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.25);
     transition: all 0.4s ease;
 }
+
 textarea {
     transition: none;
     resize: vertical;
@@ -212,6 +213,7 @@ input[type="email"]::placeholder {
     color: #757575;
     text-shadow: 0px 0px 2.5px rgba(0, 0, 0, 0.25);
 }
+
 input[type="text"]:focus,
 input[type="password"]:focus,
 input[type="time"]:focus,
@@ -224,7 +226,8 @@ input[type="email"]:focus {
     transform: translateY(-0.25vh);
 }
 
-input[type="submit"], .button {
+input[type="submit"],
+.button {
     border: none;
     color: #000;
 
@@ -243,7 +246,8 @@ input[type="submit"], .button {
     transition: 0.1s ease;
 }
 
-input[type="submit"]:hover, .button:hover {
+input[type="submit"]:hover,
+.button:hover {
     transition: 0.1s;
     cursor: pointer;
 
@@ -252,12 +256,14 @@ input[type="submit"]:hover, .button:hover {
     background: #e9e4e4;
 }
 
-input[type="submit"]:focus, .button:focus {
+input[type="submit"]:focus,
+.button:focus {
     transition: 0.4s;
     outline: 2px solid rgb(1, 176, 207);
 }
 
-input[type="submit"]:active, .button:active {
+input[type="submit"]:active,
+.button:active {
     transition: 0.1s;
     cursor: pointer;
 
