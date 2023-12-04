@@ -3,7 +3,7 @@ name: Build and Test React App
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   build-and-test:
