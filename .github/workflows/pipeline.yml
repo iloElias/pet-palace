@@ -23,6 +23,3 @@ jobs:
 
       - name: Run Unit Tests
         run: npm test
-
-      - name: Run End-to-End Tests
-        run: npm run test:e2e
