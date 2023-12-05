@@ -49,7 +49,7 @@ function DefaultLayout({ children, header }) {
   );
 }
 
-function App() {
+function App({ testeUserName }) {
   const [user, setUser] = useState();
   const [userID, setUserID] = useState();
   const [userLastName, setUserLastName] = useState();
@@ -57,6 +57,7 @@ function App() {
   const [userPassword, setUserPassword] = useState();
   const [userCPF, setUserCPF] = useState();
   const [userTel, setUserTel] = useState();
+
 
   let userInfo = {
     user,
@@ -90,6 +91,10 @@ function App() {
     setModalOpen(false);
     setModalType(null);
   };
+
+  if (testeUserName) {
+    setUser(testeUserName)
+  }
 
   return (
     <Router>
@@ -258,4 +263,4 @@ function App() {
   );
 }
 
-export default App;
+export { App, NotAllowed };
